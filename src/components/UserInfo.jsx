@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getUserInfo } from "./API_Calls";
+import Posts from "./posts/Posts";
 
 export default function UserInfo({ token }) {
   const [myInfo, setMyInfo] = useState({});
@@ -10,25 +11,18 @@ export default function UserInfo({ token }) {
     }
     getInfo();
   }, []);
-  const { username, name, location, posts } = myInfo;
+  const { username, name, location } = myInfo;
   return (
-    <div>
-      <ul>
-        <li>Username: {username}</li>
-        <li>Name: {name}</li>
-        <li>Location: {location}</li>
-      </ul>
+    <div className="user-info">
+      <div>
+        <h3>Account Information</h3>
+        <p>Username: {username}</p>
+        <p>Name: {name}</p>
+        <p>Location: {location}</p>
+      </div>
       <div className="user-posts">
-        {posts?.map((post) => {
-          return (
-            <ul key={post.id}>
-              <li>
-                <h3>{post.title}</h3>
-              </li>
-              <li> {post.content}</li>
-            </ul>
-          );
-        })}
+        <h3>Your Posts</h3>
+        <Posts posts={myInfo}></Posts>
       </div>
     </div>
   );

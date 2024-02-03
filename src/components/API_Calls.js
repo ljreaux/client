@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api";
+import { json } from "react-router-dom";
 
 export async function register({
   username,
@@ -8,7 +8,7 @@ export async function register({
   location,
 }) {
   try {
-    const response = await fetch(`${API_URL}/users/register`, {
+    const response = await fetch(`/api/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,6 +21,7 @@ export async function register({
       }),
     });
     const result = await response.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.error(error);
@@ -29,7 +30,7 @@ export async function register({
 
 export async function login({ username, password }) {
   try {
-    const response = await fetch(`${API_URL}/users/login`, {
+    const response = await fetch(`/api/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,6 +41,7 @@ export async function login({ username, password }) {
       }),
     });
     const result = await response.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.error(error);
@@ -47,14 +49,61 @@ export async function login({ username, password }) {
 }
 
 export async function getUserInfo(token) {
-  console.log(token);
   try {
-    const response = await fetch(`${API_URL}/users/me`, {
+    const response = await fetch(`/api/users/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getAllPosts() {
+  try {
+    const response = await fetch("/api/posts");
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getPostsbyTag(tagname) {
+  try {
+    const response = await fetch(`api/tags/%23${tagname}/posts`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getAllTags() {
+  try {
+    const response = await fetch(`api/tags/`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function createNewPost(token, body) {
+  try {
+    const response = await fetch(`/api/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
     });
     const result = await response.json();
     console.log(result);

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { register } from "./API_Calls";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Register({ setToken, token }) {
+  const [message, setMessage] = useState("");
   const nav = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,10 +18,11 @@ export default function Register({ setToken, token }) {
     const user = await register(userObj);
     const { token } = user;
     setToken(token);
-    nav("/account");
+    token && nav("/account");
+    setMessage(user.message);
   }
   return (
-    <>
+    <div className="register">
       <h1>Welcome to Juicebox</h1>
       <form onSubmit={handleSubmit}>
         <h3>Register</h3>
@@ -47,9 +49,10 @@ export default function Register({ setToken, token }) {
         </label>
         <button type="submit">Submit</button>
       </form>
+      {message && <p className="error">{message}</p>}
       <p>
         Already Have an account? <Link to={"/account"}>Login</Link> instead
       </p>
-    </>
+    </div>
   );
 }
