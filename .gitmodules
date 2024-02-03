@@ -1,0 +1,3 @@
+[submodule "server"]
+	path = server
+	url = git@github.com:ljreaux/Unit4.Juicebox.Starter.git
