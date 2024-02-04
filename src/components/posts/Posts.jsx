@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { getAllPosts } from "../API_Calls";
 import Post from "./Post";
 
 export default function Posts({ posts, header, myInfo }) {

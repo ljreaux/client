@@ -1,8 +1,34 @@
-# React + Vite
+# Juicebox
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Juicebox is a simple PERN social media app. 
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Register and login to personal account.
+2. View account info.
+3. Post blog-style posts. 
+4. Edit, delete, and add tags to post.
+5. View other users posts.
+6. View posts by tag names.
+7. View posts by user.
+
+## Use
+
+This app is not hosted. To view, please fork and clone the repo here. You will then run the following terminal commands.
+
+```
+// creates postgreSQL database
+$ createdb juicebox-dev
+
+// install client dependencies
+$ npm i 
+
+// install server dependencies 
+$ cd server
+$ npm i
+
+// create dist folder and start server
+$ cd ..
+$ npm run start
+
+```

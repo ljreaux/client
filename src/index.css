@@ -1,3 +1,4 @@
+/* global styles */
 body {
   padding: 0;
   margin: 0;
@@ -17,8 +18,19 @@ input, textarea {
 
 select {
   height: 2em;
+} 
+
+a {
+  color: #007991;
+  text-decoration: none;
 }
 
+.component {
+  margin-top: 6rem ;
+  margin-inline: 2rem ;
+}
+
+/* navbar styles */
 .navbar {
   width: 100vw;
   background-color: #222E50;
@@ -37,11 +49,7 @@ select {
   text-decoration: none;
 }
 
-.component {
-  margin-top: 6rem ;
-  margin-inline: 2rem ;
-}
-
+/* form styles */
 .register, .login-form, .user-info {
   display: flex;
   flex-direction: column;
@@ -60,7 +68,7 @@ select {
   justify-content: space-between;
 }
 
-
+/* post styles */
 .post-card {
   display: grid;
   place-items: center;
@@ -74,11 +82,8 @@ select {
   display: flex;
   gap: 1em;
 }
-a {
-  color: #007991;
-  text-decoration: none;
-}
 
+/* setting error and success message colors */
 .error {
   font-weight: bold;
   color: rgb(235, 136, 136);
@@ -95,6 +100,7 @@ a {
   text-align: center;
 }
 
+/* new post and edit classes */
 .new-post, .edit-post {
   text-align: center;
   display: flex;

@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { getPostById, getAllTags, deletePost, editPost } from "../API_Calls";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getPostById, getAllTags, deletePost, editPost } from "../API_Calls";
 import TagButton from "./TagButton";
+
 export default function Edit({ token, message, setMessage }) {
   const nav = useNavigate();
   const { postId } = useParams();
+
   const [post, setPost] = useState({});
+  const { title, content } = post;
+
   const [tagList, setTagList] = useState({});
+  const [allTags, setAllTags] = useState([]);
 
   useEffect(() => {
     async function setEdited() {
@@ -15,7 +20,7 @@ export default function Edit({ token, message, setMessage }) {
     }
     setEdited();
   }, [postId]);
-  const [allTags, setAllTags] = useState([]);
+
   useEffect(() => {
     async function getTags() {
       const { tags: taglist } = await getAllTags();
@@ -24,7 +29,9 @@ export default function Edit({ token, message, setMessage }) {
     getTags();
   }, []);
 
-  const { title, content, tags } = post;
+  useEffect(() => {
+    setMessage("");
+  }, [postId]);
 
   function handleContentChange(e) {
     setPost((prev) => {
@@ -51,10 +58,6 @@ export default function Edit({ token, message, setMessage }) {
     const deletedRes = await deletePost(postId, token);
     setMessage(deletedRes.message);
   }
-
-  useEffect(() => {
-    setMessage("");
-  }, [postId]);
 
   async function handleSubmit(e) {
     e.preventDefault();

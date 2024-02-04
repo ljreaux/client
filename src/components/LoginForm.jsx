@@ -3,6 +3,7 @@ import { login } from "./API_Calls";
 
 export default function LoginForm({ setToken }) {
   const [message, setMessage] = useState("");
+
   async function handleSubmit(e) {
     e.preventDefault();
     const { loginUser: username, loginPass: password } = e.target;
@@ -15,6 +16,7 @@ export default function LoginForm({ setToken }) {
     setToken(token);
     setMessage(user.message);
   }
+
   return (
     <>
       <form onSubmit={handleSubmit} className="login-form">

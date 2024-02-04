@@ -1,14 +1,12 @@
-import React from "react";
 import Register from "./Register";
-import { Link } from "react-router-dom";
-import Posts from "./posts/Posts";
 import AddNewPost from "./posts/AddNewPost";
+import Posts from "./posts/Posts";
 
 export default function Home({ token, setToken, posts, setNewPost, myInfo }) {
   return (
     <div className="component">
       {!token ? (
-        <Register setToken={setToken} token={token}></Register>
+        <Register setToken={setToken}></Register>
       ) : (
         <>
           <AddNewPost token={token} setNewPost={setNewPost} />

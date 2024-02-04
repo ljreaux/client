@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { register } from "./API_Calls";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { register } from "./API_Calls";
 
-export default function Register({ setToken, token }) {
-  const [message, setMessage] = useState("");
+export default function Register({ setToken }) {
   const nav = useNavigate();
+  const [message, setMessage] = useState("");
+
   async function handleSubmit(e) {
     e.preventDefault();
     const { firstname, lastname, username, password, location } = e.target;
@@ -15,12 +16,16 @@ export default function Register({ setToken, token }) {
       password: password.value,
       location: location.value,
     };
+
     const user = await register(userObj);
     const { token } = user;
+
     setToken(token);
     token && nav("/account");
+
     setMessage(user.message);
   }
+
   return (
     <div className="register">
       <h1>Welcome to Juicebox</h1>

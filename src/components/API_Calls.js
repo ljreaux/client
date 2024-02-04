@@ -1,5 +1,3 @@
-import { json } from "react-router-dom";
-
 export async function register({
   username,
   password,
@@ -85,7 +83,7 @@ export async function getPostById(id) {
   }
 }
 
-export async function getPostsbyTag(tagname) {
+export async function getPostsByTag(tagname) {
   try {
     const response = await fetch(`/api/tags/%23${tagname}/posts`);
     const result = await response.json();
@@ -95,10 +93,12 @@ export async function getPostsbyTag(tagname) {
   }
 }
 
-export async function getAllTags() {
+export async function getPostsByAuthor(authorId) {
   try {
-    const response = await fetch(`/api/tags/`);
+    console.log(authorId);
+    const response = await fetch(`/api/posts/user/${authorId}`);
     const result = await response.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.error(error);
@@ -109,6 +109,24 @@ export async function createNewPost(token, body) {
   try {
     const response = await fetch(`/api/posts`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function editPost(id, body, token) {
+  try {
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -140,30 +158,10 @@ export async function deletePost(id, token) {
   }
 }
 
-export async function editPost(id, body, token) {
+export async function getAllTags() {
   try {
-    const response = await fetch(`/api/posts/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(`/api/tags/`);
     const result = await response.json();
-
-    return result;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function getPostsByAuthor(authorId) {
-  try {
-    console.log(authorId);
-    const response = await fetch(`/api/posts/user/${authorId}`);
-    const result = await response.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.error(error);

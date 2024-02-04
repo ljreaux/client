@@ -1,9 +1,8 @@
-// import React, { useEffect, useState } from "react";
-import { getUserInfo } from "./API_Calls";
 import Posts from "./posts/Posts";
 
-export default function UserInfo({ token, myInfo, setToken }) {
+export default function UserInfo({ myInfo, setToken }) {
   const { username = "", name = "", location = "" } = myInfo || {};
+
   return (
     <div className="user-info">
       <div>

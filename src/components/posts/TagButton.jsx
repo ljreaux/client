@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function TagButton({ name, id, tagList, setTagList }) {
+export default function TagButton({ name, tagList, setTagList }) {
   const [isAdded, setIsAdded] = useState(false);
 
   useEffect(() => {

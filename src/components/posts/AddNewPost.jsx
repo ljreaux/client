@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { createNewPost, getAllTags } from "../API_Calls";
+import { createNewPost } from "../API_Calls";
 
 export default function AddNewPost({ token, setNewPost }) {
   async function handleSubmit(e) {
     e.preventDefault();
     const { newTitle: title, newContent: content } = e.target;
 
-    const newPost = await createNewPost(token, {
+    await createNewPost(token, {
       title: title.value,
       content: content.value,
     });
     setNewPost((prev) => !prev);
   }
+
   return (
     <form onSubmit={handleSubmit} className="new-post">
       <h3>Create New Post</h3>

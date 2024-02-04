@@ -1,17 +1,22 @@
+// function imports
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { getAllPosts, getUserInfo } from "./components/API_Calls";
+
+// component imports
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Account from "./components/Account";
-import Feed from "./components/Feed";
-import { getAllPosts, getUserInfo } from "./components/API_Calls";
-import PostsByTag from "./components/posts/PostsByTag";
 import Edit from "./components/posts/Edit";
 import PostsByAuthor from "./components/posts/PostByAuthor";
+import PostsByTag from "./components/posts/PostsByTag";
+
 function App() {
   const [token, setToken] = useState(null);
   const [posts, setPosts] = useState({});
   const [newPost, setNewPost] = useState(true);
   const [message, setMessage] = useState("");
+  const [myInfo, setMyInfo] = useState({});
 
   useEffect(() => {
     async function posts() {
@@ -19,10 +24,8 @@ function App() {
 
       setPosts(posts);
     }
-
     posts();
   }, [newPost, message]);
-  const [myInfo, setMyInfo] = useState({});
 
   useEffect(() => {
     async function getInfo() {
@@ -34,16 +37,7 @@ function App() {
 
   return (
     <>
-      <nav className="navbar">
-        <ul>
-          <li>
-            <Link to={"/"}>Home</Link>
-          </li>
-          <li>
-            <Link to={"/account"}>Account</Link>
-          </li>
-        </ul>
-      </nav>
+      <Navbar />
       <Routes>
         <Route
           path="/"
