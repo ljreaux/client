@@ -3,6 +3,18 @@ body {
   margin: 0;
 }
 
+button {
+  border: 1px solid black;
+  border-radius: .5rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, textarea {
+  border: 1px solid black;
+  border-radius: .5rem;
+}
+
 .navbar {
   width: 100vw;
   background-color: #222E50;
@@ -71,4 +83,30 @@ body {
 
 .center {
   text-align: center;
+}
+
+.new-post, .edit-post {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-post button, .new-post label, .edit-post button, .edit-post label {
+width: 30%;
+font-family: inherit;
+}
+
+.new-post input, .new-post textarea, .edit-post input, .edit-post textarea{
+  width: 100%;
+  margin-block: .5em;
+  text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+}
+
+.delete-btn {
+  background-color: rgb(235, 136, 136);
+  margin-block: .5em;
 }

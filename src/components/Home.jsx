@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Posts from "./posts/Posts";
 import AddNewPost from "./posts/AddNewPost";
 
-export default function Home({ token, setToken, posts, setNewPost }) {
+export default function Home({ token, setToken, posts, setNewPost, myInfo }) {
   return (
     <div className="component">
       {!token ? (
@@ -12,7 +12,7 @@ export default function Home({ token, setToken, posts, setNewPost }) {
       ) : (
         <>
           <AddNewPost token={token} setNewPost={setNewPost} />
-          <Posts posts={posts} header={"Feed"} />
+          <Posts posts={posts} header={"Feed"} myInfo={myInfo} />
         </>
       )}
     </div>

@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import EditAndDelete from "./EditAndDelete";
 
-export default function Post({ post: { id, title, content, tags, author } }) {
-  useEffect(() => {
-    console.log(tags);
-  }, []);
+export default function Post({
+  post: { id, title, content, tags, author },
+  myInfo,
+}) {
+  useEffect(() => console.log(myInfo, author), []);
   return (
     <div className="post-card">
       <h3>{title}</h3>
@@ -22,6 +24,7 @@ export default function Post({ post: { id, title, content, tags, author } }) {
           );
         })}
       </span>
+      {myInfo?.id == author?.id && <EditAndDelete postId={id} />}
     </div>
   );
 }

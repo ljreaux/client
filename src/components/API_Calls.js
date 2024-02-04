@@ -21,7 +21,7 @@ export async function register({
       }),
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (error) {
     console.error(error);
@@ -41,7 +41,7 @@ export async function login({ username, password }) {
       }),
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (error) {
     console.error(error);
@@ -58,7 +58,7 @@ export async function getUserInfo(token) {
       },
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (error) {
     console.error(error);
@@ -75,9 +75,19 @@ export async function getAllPosts() {
   }
 }
 
+export async function getPostById(id) {
+  try {
+    const response = await fetch(`/api/posts/${id}`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function getPostsbyTag(tagname) {
   try {
-    const response = await fetch(`api/tags/%23${tagname}/posts`);
+    const response = await fetch(`/api/tags/%23${tagname}/posts`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -87,7 +97,7 @@ export async function getPostsbyTag(tagname) {
 
 export async function getAllTags() {
   try {
-    const response = await fetch(`api/tags/`);
+    const response = await fetch(`/api/tags/`);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -106,7 +116,7 @@ export async function createNewPost(token, body) {
       body: JSON.stringify(body),
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (error) {
     console.error(error);
