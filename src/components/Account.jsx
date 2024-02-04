@@ -9,9 +9,9 @@ export default function Account({ token, setToken, myInfo, setMyInfo }) {
       {token ? (
         <UserInfo
           token={token}
+          setToken={setToken}
           myInfo={myInfo}
           setMyInfo={setMyInfo}
-          myInfo={myInfo}
         />
       ) : (
         <LoginForm setToken={setToken} />

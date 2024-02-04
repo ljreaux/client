@@ -3,7 +3,7 @@ import { getAllPosts } from "../API_Calls";
 import Post from "./Post";
 
 export default function Posts({ posts, header, myInfo }) {
-  const { posts: displayPosts } = posts;
+  const { posts: displayPosts } = posts || {};
 
   return (
     <div className="center">

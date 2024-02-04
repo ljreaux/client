@@ -122,3 +122,50 @@ export async function createNewPost(token, body) {
     console.error(error);
   }
 }
+
+export async function deletePost(id, token) {
+  try {
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function editPost(id, body, token) {
+  try {
+    const response = await fetch(`/api/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getPostsByAuthor(authorId) {
+  try {
+    console.log(authorId);
+    const response = await fetch(`/api/posts/user/${authorId}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}

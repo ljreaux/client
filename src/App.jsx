@@ -6,10 +6,12 @@ import Feed from "./components/Feed";
 import { getAllPosts, getUserInfo } from "./components/API_Calls";
 import PostsByTag from "./components/posts/PostsByTag";
 import Edit from "./components/posts/Edit";
+import PostsByAuthor from "./components/posts/PostByAuthor";
 function App() {
   const [token, setToken] = useState(null);
   const [posts, setPosts] = useState({});
   const [newPost, setNewPost] = useState(true);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     async function posts() {
@@ -19,7 +21,7 @@ function App() {
     }
 
     posts();
-  }, [newPost]);
+  }, [newPost, message]);
   const [myInfo, setMyInfo] = useState({});
 
   useEffect(() => {
@@ -66,7 +68,16 @@ function App() {
             />
           }
         />
-        <Route path="/edit/:postId" element={<Edit />}></Route>
+        <Route
+          path="/edit/:postId"
+          element={
+            <Edit token={token} message={message} setMessage={setMessage} />
+          }
+        ></Route>
+        <Route
+          path="/author/:authorId/:authorName"
+          element={<PostsByAuthor />}
+        />
         <Route path="/:tagname" element={<PostsByTag />} />
       </Routes>
     </>

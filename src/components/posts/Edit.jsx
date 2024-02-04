@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getPostById, getAllTags } from "../API_Calls";
-import { useParams } from "react-router-dom";
-export default function Edit() {
+import { getPostById, getAllTags, deletePost, editPost } from "../API_Calls";
+import { useParams, useNavigate } from "react-router-dom";
+import TagButton from "./TagButton";
+export default function Edit({ token, message, setMessage }) {
+  const nav = useNavigate();
   const { postId } = useParams();
   const [post, setPost] = useState({});
+  const [tagList, setTagList] = useState({});
 
   useEffect(() => {
     async function setEdited() {
@@ -33,11 +36,60 @@ export default function Edit() {
       return { ...prev, title: e.target.value };
     });
   }
+
+  async function handleDelete() {
+    const edited = await editPost(
+      postId,
+      {
+        title: "about to delete",
+        content: "about to delete",
+        tags: "",
+      },
+      token
+    );
+    console.log(edited);
+    const deletedRes = await deletePost(postId, token);
+    setMessage(deletedRes.message);
+  }
+
+  useEffect(() => {
+    setMessage("");
+  }, [postId]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const { editTitle: title, editContent: content } = e.target;
+    const body = {
+      title: title.value,
+      content: content.value,
+    };
+    if (Object.keys(tagList).length > 0) {
+      body.tags = Object.keys(tagList).join(" ");
+    } else {
+      body.tags = null;
+    }
+    const edited = await editPost(postId, body, token);
+    if (edited) setMessage("Message Edited Successfully!");
+    console.log(edited);
+  }
+
   return (
-    <form className="component edit-post">
+    <form
+      className="component edit-post"
+      onSubmit={(e) => {
+        handleSubmit(e);
+        setTimeout(() => nav("/"), 3000);
+      }}
+    >
+      <h1>Edit Post</h1>
       <label htmlFor="title">
         Title:{" "}
-        <input type="text" value={title ?? ""} onChange={handleTitleChange} />
+        <input
+          type="text"
+          value={title ?? ""}
+          onChange={handleTitleChange}
+          id="editTitle"
+        />
       </label>
       <label htmlFor="content">
         Content:{" "}
@@ -45,21 +97,48 @@ export default function Edit() {
           type="text"
           value={content ?? ""}
           onChange={handleContentChange}
+          id="editContent"
         />
-      </label>
-      <label htmlFor="Tags">
-        Tags
-        <input type="text" list="taglist" />
-      </label>
-      <datalist id="taglist">
-        {allTags.map(({ name, id }) => {
-          return <option value={name} key={id}></option>;
-        })}
-      </datalist>
+      </label>{" "}
+      <div className="tags-container">
+        <h3>Tags</h3>
+        <span className="tags">
+          {allTags.map(({ name, id }) => {
+            return (
+              <TagButton
+                name={name}
+                key={id}
+                tagList={tagList}
+                setTagList={setTagList}
+              />
+            );
+          })}
+        </span>
+        <div>
+          <label htmlFor="newTag">
+            Add New Tag
+            <input type="text" />
+          </label>
+        </div>
+      </div>
       <button type="submit">Submit Changes</button>
-      <button type="button" className="delete-btn">
+      <button
+        type="button"
+        className="delete-btn"
+        onClick={() => {
+          handleDelete();
+          setTimeout(() => nav("/"), 3000);
+        }}
+      >
         Delete Post
       </button>
+      <p
+        className={`${
+          message == "Message Edited Successfully!" ? "success" : "error"
+        }`}
+      >
+        {message}
+      </p>
     </form>
   );
 }

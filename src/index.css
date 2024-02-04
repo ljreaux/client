@@ -15,6 +15,10 @@ input, textarea {
   border-radius: .5rem;
 }
 
+select {
+  height: 2em;
+}
+
 .navbar {
   width: 100vw;
   background-color: #222E50;
@@ -70,14 +74,20 @@ input, textarea {
   display: flex;
   gap: 1em;
 }
-.post-card span a {
+a {
   color: #007991;
   text-decoration: none;
 }
 
 .error {
   font-weight: bold;
-  color: red;
+  color: rgb(235, 136, 136);
+  text-transform: uppercase;
+}
+
+.success {
+  font-weight: bold;
+  color: rgb(91, 206, 91);
   text-transform: uppercase;
 }
 
@@ -109,4 +119,59 @@ font-family: inherit;
 .delete-btn {
   background-color: rgb(235, 136, 136);
   margin-block: .5em;
+}
+
+.tags-container {
+  display: grid;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  border-radius: .5em;
+  padding: 1em ;
+  margin: 1em;
+  min-width: 50vw;
+  max-width: fit-content;
+  place-items: center;
+}
+.tags-container h3 {
+  margin-top: 0;
+}
+.tags {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.tags label {
+  display: flex;
+  margin-inline: .5em;
+  align-items: center;
+}
+.tags label input {
+  /* margin: 0; */
+  width: fit-content;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: #007991;
+  margin: .5em ;
+  
+}
+
+.button-container button {
+  color: white;
+  width: fit-content;
+  border: none;
+  background-color: inherit;
+}
+
+.added, .added button {
+  background-color:rgb(235, 136, 136);
+  color: black;
 }

@@ -6,11 +6,12 @@ export default function Post({
   post: { id, title, content, tags, author },
   myInfo,
 }) {
-  useEffect(() => console.log(myInfo, author), []);
   return (
     <div className="post-card">
       <h3>{title}</h3>
-      <h4>{author.name}</h4>
+      <Link to={`/author/${author.id}/${author.name}`} className="author">
+        by {author.name}
+      </Link>
       <p>{content}</p>
       <span>
         {tags.map((tag) => {
