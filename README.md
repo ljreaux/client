@@ -16,18 +16,18 @@ Juicebox is a simple PERN social media app.
 
 This app is not hosted. To view, please fork and clone the repo here. You will then run the following terminal commands.
 
-```
-// creates postgreSQL database
+```shell
+# creates postgreSQL database
 $ createdb juicebox-dev
 
-// install client dependencies
+# install client dependencies
 $ npm i 
 
-// install server dependencies 
+# install server dependencies 
 $ cd server
 $ npm i
 
-// create dist folder and start server
+# create dist folder and start server
 $ cd ..
 $ npm run start
 
