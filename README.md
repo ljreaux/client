@@ -33,6 +33,6 @@ $ npm run start
 
 ```
 
-Then the app will be up and running on http//:localhost:3000
+Then the app will be up and running on http://localhost:3000
 
 Please go to the README in the server folder to view API documentation.
