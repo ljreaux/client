@@ -117,12 +117,6 @@ export default function Edit({ token, message, setMessage }) {
             );
           })}
         </span>
-        <div>
-          <label htmlFor="newTag">
-            Add New Tag
-            <input type="text" />
-          </label>
-        </div>
       </div>
       <button type="submit">Submit Changes</button>
       <button
